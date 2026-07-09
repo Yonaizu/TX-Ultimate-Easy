@@ -137,13 +137,14 @@ script:
       - script.wait: restore_from_nvs
       - script.wait: boot_initialize
       - script.wait: boot_sequence
-      - script.execute:
-          id: api_send_ha_event_boot
-          type: done
-      - script.wait: api_send_ha_event_boot
+
       - binary_sensor.template.publish:
           id: bs_boot_completed
           state: ON  # yamllint disable-line rule:truthy
+
+      - script.execute:
+          id: api_send_ha_event_boot
+          type: done
 
   - id: boot_initialize
     mode: restart
