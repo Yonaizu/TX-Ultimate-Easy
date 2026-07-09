@@ -213,6 +213,11 @@ esphome:
   platformio_options:
     build_flags:
       - -D TX_ULTIMATE_EASY_HW_TOUCH
+  on_boot:
+    - priority: -200
+      then:
+        - script.execute: boot_initialize_touch
+        - script.wait: boot_initialize_touch
 
 number:
   - id: nr_touch_duration
