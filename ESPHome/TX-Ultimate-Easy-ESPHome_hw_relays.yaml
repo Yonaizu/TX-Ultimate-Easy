@@ -46,6 +46,11 @@ esphome:
   platformio_options:
     build_flags:
       - -D TX_ULTIMATE_EASY_HW_RELAYS
+  on_boot:
+    - priority: -200
+      then:
+        - script.execute: boot_initialize_relays
+        - script.wait: boot_initialize_relays
 
 globals:
   - id: boot_initialization_relays
