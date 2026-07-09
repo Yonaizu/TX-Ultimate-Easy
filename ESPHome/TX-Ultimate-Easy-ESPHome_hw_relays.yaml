@@ -345,6 +345,7 @@ script:
   - id: !extend boot_initialize
     then:
       - script.execute: boot_initialize_relays
+      - script.wait: boot_initialize_relays
 
   - id: !extend boot_done
     then:
