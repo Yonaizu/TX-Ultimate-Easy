@@ -65,7 +65,11 @@ esphome:
   platformio_options:
     build_flags:
       - -D TX_ULTIMATE_EASY_HW_BUTTONS
-
+  on_boot:
+    - priority: -200
+      then:
+        - script.execute: buttons_reset_state
+        - script.wait: buttons_reset_state
 globals:
   # Packed button actions - replaces 4 separate selects
   - id: button_actions_packed
