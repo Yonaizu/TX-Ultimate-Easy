@@ -104,6 +104,7 @@ script:
   - id: !extend boot_initialize
     then:
       - script.execute: boot_initialize_buttons
+      - script.wait: boot_initialize_buttons
 
   - id: boot_initialize_buttons
     mode: restart
@@ -207,13 +208,13 @@ script:
     mode: restart
     then:
       - lambda: |-
-          // Reset all button-related global state
           id(button_press_start_time) = 0;
           id(last_release_time) = 0;
           id(click_counter) = 0;
           id(button_press_button) = 0;
           id(button_press_position) = 0;
-          buttons_release->execute();
+      - script.execute: buttons_release
+      - script.wait: buttons_release
 
   - id: !extend dump_config
     then:
