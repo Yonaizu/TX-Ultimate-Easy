@@ -249,13 +249,15 @@ script:
   - id: !extend boot_initialize
     then:
       - script.execute: boot_initialize_touch
+      - script.wait: boot_initialize_touch
 
   - id: boot_initialize_touch
     mode: restart
     then:
-      - lambda: |-
-          boot_initialize_touch_format->execute();
-          boot_initialize_touch_gang->execute();
+      - script.execute: boot_initialize_touch_format
+      - script.wait: boot_initialize_touch_format
+      - script.execute: boot_initialize_touch_gang
+      - script.wait: boot_initialize_touch_gang
 
   - id: boot_initialize_touch_format
     mode: restart
